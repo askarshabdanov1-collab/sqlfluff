@@ -1,0 +1,376 @@
+# YML test files are auto-generated from SQL files and should not be edited by
+# hand. To help enforce this, the "hash" field in the file must match a hash
+# computed by SQLFluff when running the tests. Please run
+# `python test/generate_parse_fixture_yml.py`  to generate them after adding or
+# altering SQL files.
+_hash: 42e6a44db19f55e56f7c07128e5056d479650f2df1f577d2bdf17df002094eb9
+file:
+- statement:
+    attach_statement:
+      keyword: ATTACH
+      quoted_literal: "'file.db'"
+- statement_terminator: ;
+- statement:
+    attach_statement:
+    - keyword: ATTACH
+    - quoted_literal: "'file.db'"
+    - keyword: AS
+    - naked_identifier: dbname
+- statement_terminator: ;
+- statement:
+    attach_statement:
+    - keyword: ATTACH
+    - keyword: IF
+    - keyword: NOT
+    - keyword: EXISTS
+    - quoted_literal: "'file.db'"
+    - keyword: AS
+    - naked_identifier: dbname
+- statement_terminator: ;
+- statement:
+    attach_statement:
+    - keyword: ATTACH
+    - keyword: DATABASE
+    - quoted_literal: "'file.db'"
+    - keyword: AS
+    - naked_identifier: dbname
+- statement_terminator: ;
+- statement:
+    attach_statement:
+    - keyword: ATTACH
+    - keyword: IF
+    - keyword: NOT
+    - keyword: EXISTS
+    - keyword: DATABASE
+    - quoted_literal: "'file.db'"
+    - keyword: AS
+    - naked_identifier: dbname
+- statement_terminator: ;
+- statement:
+    attach_statement:
+    - keyword: ATTACH
+    - quoted_literal: "':memory:'"
+    - keyword: AS
+    - naked_identifier: mem_db
+- statement_terminator: ;
+- statement:
+    attach_statement:
+    - keyword: ATTACH
+    - quoted_literal: "'s3://bucket/db.duckdb'"
+    - keyword: AS
+    - naked_identifier: s3_db
+- statement_terminator: ;
+- statement:
+    attach_statement:
+    - keyword: ATTACH
+    - quoted_literal: "''"
+    - keyword: AS
+    - naked_identifier: empty_db
+- statement_terminator: ;
+- statement:
+    attach_statement:
+      keyword: ATTACH
+      quoted_literal: "'file.db'"
+      bracketed:
+        start_bracket: (
+        naked_identifier: READ_ONLY
+        end_bracket: )
+- statement_terminator: ;
+- statement:
+    attach_statement:
+      keyword: ATTACH
+      quoted_literal: "'file.db'"
+      bracketed:
+      - start_bracket: (
+      - naked_identifier: READ_ONLY
+      - comma: ','
+      - naked_identifier: TYPE
+      - naked_identifier: SQLITE
+      - end_bracket: )
+- statement_terminator: ;
+- statement:
+    attach_statement:
+    - keyword: ATTACH
+    - quoted_literal: "'file.db'"
+    - keyword: AS
+    - naked_identifier: dbname
+    - bracketed:
+      - start_bracket: (
+      - naked_identifier: READ_ONLY
+      - comma: ','
+      - naked_identifier: TYPE
+      - naked_identifier: SQLITE
+      - end_bracket: )
+- statement_terminator: ;
+- statement:
+    attach_statement:
+    - keyword: ATTACH
+    - quoted_literal: "'file.db'"
+    - keyword: AS
+    - naked_identifier: dbname
+    - bracketed:
+      - start_bracket: (
+      - naked_identifier: READ_ONLY
+      - numeric_literal: '1'
+      - comma: ','
+      - naked_identifier: TYPE
+      - naked_identifier: SQLITE
+      - end_bracket: )
+- statement_terminator: ;
+- statement:
+    attach_statement:
+    - keyword: ATTACH
+    - quoted_literal: "'file.db'"
+    - keyword: AS
+    - naked_identifier: dbname
+    - bracketed:
+        start_bracket: (
+        naked_identifier: READ_ONLY
+        boolean_literal: 'false'
+        end_bracket: )
+- statement_terminator: ;
+- statement:
+    attach_statement:
+    - keyword: ATTACH
+    - quoted_literal: "'file.db'"
+    - keyword: AS
+    - naked_identifier: dbname
+    - bracketed:
+        start_bracket: (
+        naked_identifier: READ_ONLY
+        numeric_literal: '0'
+        end_bracket: )
+- statement_terminator: ;
+- statement:
+    attach_statement:
+    - keyword: ATTACH
+    - quoted_literal: "'file.db'"
+    - keyword: AS
+    - naked_identifier: dbname
+    - bracketed:
+        start_bracket: (
+        naked_identifier: READ_WRITE
+        end_bracket: )
+- statement_terminator: ;
+- statement:
+    detach_statement:
+      keyword: DETACH
+      naked_identifier: dbname
+- statement_terminator: ;
+- statement:
+    detach_statement:
+    - keyword: DETACH
+    - keyword: DATABASE
+    - naked_identifier: dbname
+- statement_terminator: ;
+- statement:
+    detach_statement:
+    - keyword: DETACH
+    - keyword: IF
+    - keyword: EXISTS
+    - naked_identifier: dbname
+- statement_terminator: ;
+- statement:
+    detach_statement:
+    - keyword: DETACH
+    - keyword: DATABASE
+    - keyword: IF
+    - keyword: EXISTS
+    - naked_identifier: dbname
+- statement_terminator: ;
+- statement:
+    detach_statement:
+      keyword: DETACH
+      quoted_literal: "'dbname'"
+- statement_terminator: ;
+- statement:
+    checkpoint_statement:
+      keyword: CHECKPOINT
+- statement_terminator: ;
+- statement:
+    checkpoint_statement:
+      keyword: CHECKPOINT
+      naked_identifier: dbname
+- statement_terminator: ;
+- statement:
+    checkpoint_statement:
+    - keyword: FORCE
+    - keyword: CHECKPOINT
+- statement_terminator: ;
+- statement:
+    checkpoint_statement:
+    - keyword: FORCE
+    - keyword: CHECKPOINT
+    - naked_identifier: dbname
+- statement_terminator: ;
+- statement:
+    export_database_statement:
+    - keyword: EXPORT
+    - keyword: DATABASE
+    - quoted_literal: "'target_dir'"
+- statement_terminator: ;
+- statement:
+    export_database_statement:
+    - keyword: EXPORT
+    - keyword: DATABASE
+    - quoted_literal: "'target_dir'"
+    - bracketed:
+      - start_bracket: (
+      - naked_identifier: FORMAT
+      - naked_identifier: PARQUET
+      - end_bracket: )
+- statement_terminator: ;
+- statement:
+    export_database_statement:
+    - keyword: EXPORT
+    - keyword: DATABASE
+    - quoted_literal: "'target_dir'"
+    - bracketed:
+      - start_bracket: (
+      - naked_identifier: FORMAT
+      - naked_identifier: PARQUET
+      - comma: ','
+      - naked_identifier: CODEC
+      - naked_identifier: ZSTD
+      - end_bracket: )
+- statement_terminator: ;
+- statement:
+    export_database_statement:
+    - keyword: EXPORT
+    - keyword: DATABASE
+    - quoted_literal: "'target_dir'"
+    - bracketed:
+      - start_bracket: (
+      - naked_identifier: FORMAT
+      - naked_identifier: CSV
+      - comma: ','
+      - naked_identifier: DELIMITER
+      - quoted_literal: "','"
+      - end_bracket: )
+- statement_terminator: ;
+- statement:
+    import_database_statement:
+    - keyword: IMPORT
+    - keyword: DATABASE
+    - quoted_literal: "'source_dir'"
+- statement_terminator: ;
+- statement:
+    summarize_statement:
+      keyword: SUMMARIZE
+      table_reference:
+        naked_identifier: tbl
+- statement_terminator: ;
+- statement:
+    summarize_statement:
+      keyword: SUMMARIZE
+      select_statement:
+        select_clause:
+          keyword: SELECT
+          select_clause_element:
+            wildcard_expression:
+              wildcard_identifier:
+                star: '*'
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                  naked_identifier: tbl
+- statement_terminator: ;
+- statement:
+    summarize_statement:
+      keyword: SUMMARIZE
+      select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: a
+        - comma: ','
+        - select_clause_element:
+            column_reference:
+              naked_identifier: b
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                  naked_identifier: tbl
+        where_clause:
+          keyword: WHERE
+          expression:
+            column_reference:
+              naked_identifier: a
+            comparison_operator:
+              raw_comparison_operator: '>'
+            numeric_literal: '10'
+- statement_terminator: ;
+- statement:
+    summarize_statement:
+      keyword: SUMMARIZE
+      select_statement:
+        select_clause:
+        - keyword: SELECT
+        - select_clause_element:
+            column_reference:
+              naked_identifier: a
+        - comma: ','
+        - select_clause_element:
+            function:
+              function_name:
+                function_name_identifier: count
+              function_contents:
+                bracketed:
+                  start_bracket: (
+                  star: '*'
+                  end_bracket: )
+        from_clause:
+          keyword: FROM
+          from_expression:
+            from_expression_element:
+              table_expression:
+                table_reference:
+                  naked_identifier: tbl
+        groupby_clause:
+        - keyword: GROUP
+        - keyword: BY
+        - column_reference:
+            naked_identifier: a
+- statement_terminator: ;
+- statement:
+    select_statement:
+      select_clause:
+      - keyword: SELECT
+      - select_clause_element:
+          column_reference:
+            naked_identifier: attach
+      - comma: ','
+      - select_clause_element:
+          column_reference:
+            naked_identifier: detach
+      - comma: ','
+      - select_clause_element:
+          column_reference:
+            naked_identifier: checkpoint
+      - comma: ','
+      - select_clause_element:
+          column_reference:
+            naked_identifier: export
+      - comma: ','
+      - select_clause_element:
+          column_reference:
+            naked_identifier: import
+      - comma: ','
+      - select_clause_element:
+          column_reference:
+            naked_identifier: summarize
+      from_clause:
+        keyword: FROM
+        from_expression:
+          from_expression_element:
+            table_expression:
+              table_reference:
+                naked_identifier: my_table
+- statement_terminator: ;

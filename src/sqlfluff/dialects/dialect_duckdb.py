@@ -66,9 +66,14 @@ duckdb_dialect.sets("unreserved_keywords").update(
         "ANTI",
         "APPEND",
         "ASOF",
+        "ATTACH",
+        "CHECKPOINT",
         "COMPRESSION",
         "COMPRESSION_LEVEL",
+        "DETACH",
+        "EXPORT",
         "GLOB",
+        "IMPORT",
         "MACRO",
         "MAP",
         "OVERWRITE",
@@ -84,6 +89,7 @@ duckdb_dialect.sets("unreserved_keywords").update(
         "SAMPLE",
         "SEMI",
         "STRUCT",
+        "SUMMARIZE",
         "VIRTUAL",
         "WRITE_PARTITION_COLUMNS",
     ]
@@ -1033,7 +1039,134 @@ class StatementSegment(postgres.StatementSegment):
         insert=[
             Ref("SimplifiedPivotExpressionSegment"),
             Ref("SimplifiedUnpivotExpressionSegment"),
+            Ref("AttachStatementSegment"),
+            Ref("DetachStatementSegment"),
+            Ref("CheckpointStatementSegment"),
+            Ref("ExportDatabaseStatementSegment"),
+            Ref("ImportDatabaseStatementSegment"),
+            Ref("SummarizeStatementSegment"),
         ]
+    )
+
+
+class AttachStatementSegment(BaseSegment):
+    """An `ATTACH` statement.
+
+    https://duckdb.org/docs/sql/statements/attach
+    """
+
+    type = "attach_statement"
+    match_grammar: Matchable = Sequence(
+        "ATTACH",
+        Ref("IfNotExistsGrammar", optional=True),
+        Ref.keyword("DATABASE", optional=True),
+        OneOf(
+            Ref("QuotedLiteralSegment"),
+            Ref("SingleIdentifierGrammar"),
+        ),
+        Sequence("AS", Ref("SingleIdentifierGrammar"), optional=True),
+        Bracketed(
+            Delimited(
+                Sequence(
+                    Ref("SingleIdentifierGrammar"),
+                    OneOf(
+                        Ref("LiteralGrammar"),
+                        Ref("SingleIdentifierGrammar"),
+                        optional=True,
+                    ),
+                ),
+            ),
+            optional=True,
+        ),
+    )
+
+
+class DetachStatementSegment(BaseSegment):
+    """A `DETACH` statement.
+
+    https://duckdb.org/docs/sql/statements/detach
+    """
+
+    type = "detach_statement"
+    match_grammar: Matchable = Sequence(
+        "DETACH",
+        Ref.keyword("DATABASE", optional=True),
+        Ref("IfExistsGrammar", optional=True),
+        OneOf(
+            Ref("SingleIdentifierGrammar"),
+            Ref("QuotedLiteralSegment"),
+        ),
+    )
+
+
+class CheckpointStatementSegment(BaseSegment):
+    """A `CHECKPOINT` statement.
+
+    https://duckdb.org/docs/sql/statements/checkpoint
+    """
+
+    type = "checkpoint_statement"
+    match_grammar: Matchable = Sequence(
+        Ref.keyword("FORCE", optional=True),
+        "CHECKPOINT",
+        Ref("SingleIdentifierGrammar", optional=True),
+    )
+
+
+class ExportDatabaseStatementSegment(BaseSegment):
+    """An `EXPORT DATABASE` statement.
+
+    https://duckdb.org/docs/sql/statements/export
+    """
+
+    type = "export_database_statement"
+    match_grammar: Matchable = Sequence(
+        "EXPORT",
+        "DATABASE",
+        Ref("QuotedLiteralSegment"),
+        Bracketed(
+            Delimited(
+                Sequence(
+                    Ref("SingleIdentifierGrammar"),
+                    OneOf(
+                        Ref("LiteralGrammar"),
+                        Ref("SingleIdentifierGrammar"),
+                        optional=True,
+                    ),
+                ),
+            ),
+            optional=True,
+        ),
+    )
+
+
+class ImportDatabaseStatementSegment(BaseSegment):
+    """An `IMPORT DATABASE` statement.
+
+    https://duckdb.org/docs/sql/statements/import
+    """
+
+    type = "import_database_statement"
+    match_grammar: Matchable = Sequence(
+        "IMPORT",
+        "DATABASE",
+        Ref("QuotedLiteralSegment"),
+    )
+
+
+class SummarizeStatementSegment(BaseSegment):
+    """A `SUMMARIZE` statement.
+
+    https://duckdb.org/docs/guides/meta/summarize
+    """
+
+    type = "summarize_statement"
+    match_grammar: Matchable = Sequence(
+        "SUMMARIZE",
+        OneOf(
+            Ref("SelectableGrammar"),
+            Ref("TableReferenceSegment"),
+        ),
     )
 
 
